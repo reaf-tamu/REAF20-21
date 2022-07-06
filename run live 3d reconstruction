@@ -1,0 +1,11 @@
+# Grab data during 3000 frames
+i = 0
+py_mesh = sl.Mesh()  # Create a Mesh object
+runtime_parameters = sl.RuntimeParameters()
+while i < 3000:
+    if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
+        # In background, spatial mapping will use new images, depth and pose to create and update the mesh. No specific functions are required here.
+        mapping_state = zed.get_spatial_mapping_state()
+        # Print spatial mapping state
+        print("\rImages captured: {0} / 3000 || {1}".format(i, mapping_state))
+        i = i + 1
