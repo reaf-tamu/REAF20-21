@@ -1,0 +1,4 @@
+mapping_parameters = sl.SpatialMappingParameters()
+err = zed.enable_spatial_mapping(mapping_parameters)
+if err != sl.ERROR_CODE.SUCCESS:
+    exit(1)
