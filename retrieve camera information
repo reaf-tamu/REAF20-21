@@ -1,0 +1,3 @@
+# Get camera information (serial number)
+zed_serial = zed.get_camera_information().serial_number
+print("Hello! This is my serial number: {}".format(zed_serial))
