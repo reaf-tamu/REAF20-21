@@ -1,0 +1,3 @@
+# Disable object detection and close the camera
+zed.disable_object_detection()
+zed.close()
