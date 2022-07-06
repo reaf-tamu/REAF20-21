@@ -1,0 +1,16 @@
+# Define the Object Detection module parameters
+detection_parameters = sl.ObjectDetectionParameters()
+detection_parameters.image_sync = True
+detection_parameters.enable_tracking = True
+detection_parameters.enable_mask_output = True
+
+# Object tracking requires camera tracking to be enabled
+if detection_parameters.enable_tracking:
+    zed.enable_positional_tracking()
+    
+    print("Object Detection: Loading Module...")
+err = zed.enable_object_detection(detection_parameters)
+if err != sl.ERROR_CODE.SUCCESS:
+    print("Error {}, exit program".format(err))
+    zed.close()
+    exit()
