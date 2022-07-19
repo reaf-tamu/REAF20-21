@@ -9,21 +9,21 @@ import time
 ports = serial.tools.list_ports.comports()
 serialInst = serial.Serial()
 portsList = []
-
+portsVar = ""
 for onePort in ports:
     portsList.append(str(onePort))
     print(str(onePort))
 
 val = input("Select Port: COM")
 
-for x in range(0, len(portsList)):
-    if portsList[x].startswith("COM"+str(val)):
-        portsVar = "COM" + str(val)
-        print(portsVar)
+# for x in range(0, len(portsList)):
+    # if portsList[x].startswith("/dev/ttyACM"+str(val)):
+        # portsVar = "/dev/ttyACM" + str(val)
+        # print(portsVar)
 
-serialInst.baudrate = 115200
-serialInst.port = portsVar
-serialInst.open()
+# serialInst.baudrate = 115200
+# serialInst.port = portsVar
+# serialInst.open()
 
 cap = cv2.VideoCapture(1)
 
@@ -59,11 +59,11 @@ while True:
             if len(approx) == 4:
                 cv2.putText(frame, "Rectangle", (x, y), font, 1, (255, 255, 255))
                 command = "ALL"
-                serialInst.write(command.encode('utf-8'))
-                time.sleep(1)
+                #serialInst.write(command.encode('utf-8'))
+                #time.sleep(1)
             else:
                 command = "y"
-                serialInst.write(command.encode('utf-8'))
+                #serialInst.write(command.encode('utf-8'))
 
     #End  of Rectangle Detector
 
