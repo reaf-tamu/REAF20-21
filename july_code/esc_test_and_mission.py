@@ -1,13 +1,22 @@
 import RPi.GPIO as GPIO
 from adafruit_servokit import ServoKit
 import time
+import board
+import digitalio
 
-mode = GPIO.getmode()
-print(mode)
+button = digitalio.DigitalInOut(board.D18)
+button.direction = digitalio.Direction.INPUT
 
-input_pin = 18
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(input_pin,GPIO.IN)
+button.pull = digitalio.Pull.UP
+while(1):
+	print(button.value)
+#mode = GPIO.getmode()
+#print(mode)
+#print("hello")
+#input_pin = 18
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setup(input_pin,GPIO.IN)
+#GPIO.setup('GPIO12', GPIO.IN)
 print("GPIO initiated")
 
 kit = ServoKit(channels=16)
