@@ -3,15 +3,16 @@ import cv2
 from adafruit_servokit import ServoKit
 import time
 
+input = input("Enter video name:")
 cap = cv2.VideoCapture(0)
 kit = ServoKit(channels=16)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('outDown.avi', fourcc, 20.0, (640, 480))
+out = cv2.VideoWriter(input+'.mp4', fourcc, 20.0, (640, 480))
 
 mission = 0
-sleep_sec = 5
+sleep_sec = 1
 
-move = input("Enter: [W]Forward [A]Left [D]Right [Q]Slight Left [E] Slight Right")
+move = input("Enter: [w]Forward [a]Left [d]Right [q]Slight Left [e] Slight Right")
 
 def stop():
 	thruster_val(90,90,90,90,90,90,90,90)
@@ -33,35 +34,35 @@ while (cap.isOpened()):
     if ret==True:
         out.write(frame)
 
-        if (move == "W"):
-            thruster_val(96,90,96,90,96,90,96,90)
+        if (move == "w"):
+            thruster_val(96,90,96,90,96,90,97,90)
             print("Forward")
             time.sleep(sleep_sec)
             stop()
 
-        elif(move =="A"):
-            thruster_val(90,90,90,90,96,90,96,90)
-            print("Left")
-            time.sleep(sleep_sec)
-            stop()
-
-        elif(move =="D"):
-            thruster_val(96,90,96,90,90,90,90,90)
+        elif(move =="d"):
+            thruster_val(90,90,90,90,96,90,97,90)
             print("Right")
             time.sleep(sleep_sec)
             stop()
 
-        elif(move =="Q"):
+        elif(move =="d"):
+            thruster_val(96,90,96,90,90,90,90,90)
+            print("Left")
+            time.sleep(sleep_sec)
+            stop()
+
+        elif(move =="e"):
             #Same values as Left, time reduced by half
-            thruster_val(90,90,90,90,96,90,96,90)
-            print("Slight Left")
+            thruster_val(90,90,90,90,96,90,97,90)
+            print("Slight Right")
             time.sleep(sleep_sec/2)
             stop()
 
-        elif(move =="E"):
+        elif(move =="q"):
             #Same values as Right, time reduced by half
             thruster_val(96,90,96,90,90,90,90,90)
-            print("Slight Right")
+            print("Slight Left")
             time.sleep(sleep_sec/2)
             stop()
 
@@ -71,7 +72,7 @@ while (cap.isOpened()):
             time.sleep(sleep_sec)
             stop()
 
-    move = input("Enter: [W]Forward [A]Left [D]Right [Q]Slight Left [E] Slight Right")
+    move = input("Enter: [w]Forward [a]Left [d]Right [q]Slight Left [e] Slight Right")
 
 cap.release()
 out.release()
