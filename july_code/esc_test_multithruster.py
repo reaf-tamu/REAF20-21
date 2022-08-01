@@ -5,7 +5,7 @@ kit = ServoKit(channels=16)
 kit.servo[0].angle = 90
 kit.servo[10].angle = 90
 kit.servo[3].angle = 90
-kit.servo[9].angle = 90
+kit.servo[12].angle = 90
 temp = input("step")
 while(True):
 	#trying to make thrusters move at different speeds
@@ -16,4 +16,4 @@ while(True):
 	kit.servo[0].angle = angle1
 	kit.servo[10].angle = angle2
 	kit.servo[3].angle = angle3
-	kit.servo[9].angle = angle4
+	kit.servo[12].angle = angle4
