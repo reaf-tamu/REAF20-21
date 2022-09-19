@@ -2,7 +2,7 @@ import numpy as np
 import imutils
 import argparse
 import cv2
-from ShapeDetector import ShapeDetector
+import shapedetector
 
 #this is detectOrange + shapeDetection
 
@@ -43,7 +43,7 @@ while(True):
     # shape detector
     cnts = cv2.findContours(gray.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts = cnts[0] if imutils.is_cv2() else cnts[1]
-    sd = ShapeDetector()	    
+    sd = ShapeDetector()
 	    
     for c in cnts:
 	    # detect the shapes

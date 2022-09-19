@@ -3,22 +3,22 @@ import cv2
 
 
 cap = cv2.VideoCapture(0)
-cap2 = cv2.VideoCapture(1)
-cap3 = cv2.VideoCapture(2)
+#cap2 = cv2.VideoCapture(1)
+#cap3 = cv2.VideoCapture(2)
 
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
-    ret2, frame2 = cap2.read()
-    ret3, frame3 = cap3.read()
+    #ret2, frame2 = cap2.read()
+    #ret3, frame3 = cap3.read()
     
     # Our operations on the frame come here
     #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Display the resulting frame
     cv2.imshow('frame',frame)
-    cv2.imshow('frame2', frame2)
-    cv2.imshow('frame3', frame3)
+    #cv2.imshow('frame2', frame2)
+    #cv2.imshow('frame3', frame3)
     
     #
     #Stereo test, need to download matplotlib to do disparity map
@@ -33,6 +33,6 @@ while(True):
 
 # When everything done, release the capture
 cap.release()
-cap2.release()
-cap3.release()
+#cap2.release()
+#cap3.release()
 cv2.destroyAllWindows()
