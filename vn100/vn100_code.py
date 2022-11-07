@@ -2,6 +2,7 @@ import os
 from distutils.core import setup, Extension
 #import _libvncxx
 #import vnpy
+import time
 from vnpy import *
 #s = VnSensor()
 #s.connect('/dev/ttyUSB0', 115200)
@@ -34,17 +35,31 @@ from vnpy import *
 
 s = VnSensor()
 s.connect('/dev/ttyUSB0', 115200)
-m = ImuMeasurementsRegister
+
+
+orientation = s.read_yaw_pitch_roll()
+print(f"x axis: {orientation.x}\ny axis {orientation.y}\nz axis {orientation.z}")
+while(True):
+	imuData = s.read_imu_measurements()
+	print(imuData.pressure," kPa")
+	print(imuData.mag," Gaus")
+	print(imuData.accel," m/s^2")
+	print(imuData.gyro," rad/s")
+	print(imuData.temp," C")
+	time.sleep(1)
+#m = ImuMeasurementsRegister
 #s.connect('/dev/ttyUSB0', 115200)
 #cd = ez.current_data
 #p = CompositeData()
 #p.connect('/dev/ttyUSB0', 115200)
-print(s.read_imu_measurements())
+#print(s.read_imu_measurements())
 
-s = VnSensor()
-s.connect('/dev/ttyUSB0', 115200)
+#s = VnSensor()
+#s.connect('/dev/ttyUSB0', 115200)
 #c = GpsCompassBaselineRegister()
-print(s.read_gps_compass_baseline())
+#print(s.read_gps_compass_baseline())
+
+
 
 
 
