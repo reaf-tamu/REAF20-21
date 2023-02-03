@@ -15,6 +15,6 @@ with open('Pinger_data_file1','w',newline = '\n') as file:
     while True:
         data = myPing.get_distance_simple()
         distance_meters = data['distance'] * (10 ** -3)
-        writer.writerow(distance_meters)
+        writer.writerow([distance_meters])
         time.sleep(1)
 
