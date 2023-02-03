@@ -3,7 +3,7 @@ import csv
 
 from brping import Ping1D
 myPing = Ping1D()
-myPing.connect_serial("COM3", 115200)
+myPing.connect_serial("/dev/ttyUSB0", 115200)
 if myPing.initialize() is False:
     print("Failed to initialize Ping!")
     exit(1)
