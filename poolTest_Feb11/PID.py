@@ -55,6 +55,8 @@ def speedcontrol(speed): #channels 1,3,10,12
     kit.continous_servo[10].throttle = speed
     kit.continous_servo[12].throttle = speed
 
-if __name__ == 'main':
-    #speedcontrol(pid())
-    print("yay")
+keep_going = 'y'
+while keep_going == 'y':
+    speedcontrol(pid())
+    time.sleep(2)
+    keep_going = input('y or n if you want to keep going ')
