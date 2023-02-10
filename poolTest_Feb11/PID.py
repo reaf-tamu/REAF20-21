@@ -21,10 +21,10 @@ kp = 5
 ki = 1
 kd = 0
 kit = ServoKit(channels=16) #8 different thrusters
-kit.continous_servo[1].throttle = 0
-kit.continous_servo[3].throttle = 0
-kit.continous_servo[10].throttle = 0
-kit.continous_servo[12].throttle = 0
+kit.servo[1] = 0
+# kit.continous_servo[3].throttle = 0
+# kit.continous_servo[10].throttle = 0
+# kit.continous_servo[12].throttle = 0
 
 def pid():
     global oldTime, newTime, error, setpoint, timeInterval, accerror, deerror, olderror, thruster_speed
