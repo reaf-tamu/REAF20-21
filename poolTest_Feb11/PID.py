@@ -1,11 +1,8 @@
-from board import SCL, SDA
-import busio
-import RPi.GPIO as GPIO
+
 import time
 
 from brping import Ping1D
 import pinger
-import find_global
 import datetime
 
 from adafruit_servokit import ServoKit
