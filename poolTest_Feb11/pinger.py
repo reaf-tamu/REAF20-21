@@ -5,11 +5,12 @@
 #     print("Failed to initialize Ping!")
 #     exit(1)
 from brping import Ping1D
-    myPing = Ping1D()
-    myPing.connect_serial("COM3", 115200)
-    if myPing.initialize() is False:
-        print("Failed to initialize Ping!")
-        exit(1)
+myPing = Ping1D()
+myPing.connect_serial("COM3", 115200)
+if myPing.initialize() is False:
+    print("Failed to initialize Ping!")
+    exit(1)
+    
 def get_distance():
     myPing.set_speed_of_sound(1500000,verify = True)
     data = myPing.get_distance_simple()
