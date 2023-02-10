@@ -59,5 +59,5 @@ def speedcontrol(speed): #channels 1,3,10,12
     kit.continous_servo[12].throttle = speed
 
 if __name__ == 'main':
-    //speedcontrol(pid())
+    #speedcontrol(pid())
     print("yay")
