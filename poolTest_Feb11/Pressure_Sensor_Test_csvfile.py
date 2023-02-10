@@ -1,10 +1,12 @@
 #!/usr/bin/python
 import ms5837
 import time
+import csv
+from datetime import datetime
 
 #sensor = ms5837.MS5837_30BA() # Default I2C bus is 1 (Raspberry Pi 3)
 #sensor = ms5837.MS5837_30BA(0) # Specify I2C bus
-sensor = ms5837.MS5837_02BA()
+sensor = ms5837.MS5837_02BA(1)
 #sensor = ms5837.MS5837_02BA(0)
 #sensor = ms5837.MS5837(model=ms5837.MS5837_MODEL_30BA, bus=0) # Specify model and bus
 
@@ -32,16 +34,17 @@ sensor.setFluidDensity(1000) # kg/m^3
 
 
 def ps_data(pressure,temp,freshwaterDepth,saltwaterDepth): # x is whatever the pressure sensors outputs
-    import csv
-    header = ['pressure','temp','freshwaterDepth','saltwaterDepth']
-    append = [pressure,temp,freshwaterDepth,saltwaterDepth]
-    with open('pressure_sensor_data.csv','a') as csvFile:
-        writer = csv.writer(csvFile)
-        writer.writerow(header)
-        while True:
-            writer.writerow(append)
-            time.sleep(1)
-    csvFile.close()
+
+	header = ['pressure','temp','freshwaterDepth','saltwaterDepth']
+	append = [pressure,temp,freshwaterDepth,saltwaterDepth]
+	#with open('pressure_sensor_data.csv','a') as csvFile:
+	with open('pressure_sensor_data_'+str(datetime.now())+'.csv','w') as csvFile:
+		writer = csv.writer(csvFile)
+		writer.writerow(header)
+		while True:
+			writer.writerow(append)
+			time.sleep(1)
+    #csvFile.close()
  
 ps_data(pressure,temp,freshwaterDepth,saltwaterDepth)
 

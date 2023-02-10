@@ -26,7 +26,7 @@ def thruster_val(val1, val2, val3, val4, val5, val6, val7, val8):
 	M1 = kit.servo[7].angle = val5	#
 	M2 = kit.servo[9].angle = val6	#
 	M3 = kit.servo[10].angle = val7	#
-	M4 = kit.servo[11].angle = val8	# pin 15 for servo
+	M4 = kit.servo[15].angle = val8	# pin 15 for servo, 11 for thruster
 
 while(1):#While the mission switch is not 0
 #while (cap.isOpened()):

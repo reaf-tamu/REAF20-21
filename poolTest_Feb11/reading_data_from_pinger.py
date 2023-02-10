@@ -9,7 +9,7 @@ if myPing.initialize() is False:
     exit(1)
 myPing.set_speed_of_sound(1500000,verify = True)
 
-with open('Pinger_data_file1','w',newline = '\n') as file:
+with open('Pinger_data_file1.csv','w',newline = '\n') as file:
     writer = csv.writer(file,delimiter = ',')
     writer.writerow(['Pinger distance'])
     while True:
