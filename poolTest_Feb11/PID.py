@@ -21,7 +21,7 @@ kp = 5
 ki = 1
 kd = 0
 kit = ServoKit(channels=16) #8 different thrusters
-kit.servo[1] = 0
+kit.servo[15] = 0
 # kit.continous_servo[3].throttle = 0
 # kit.continous_servo[10].throttle = 0
 # kit.continous_servo[12].throttle = 0
