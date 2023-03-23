@@ -25,14 +25,14 @@ pressure = sensor.pressure(ms5837.UNITS_psi)
 temp = sensor.temperature(ms5837.UNITS_Centigrade)
 
 
-freshwaterDepth = sensor.depth() # default is freshwater
-sensor.setFluidDensity(ms5837.DENSITY_SALTWATER)
-saltwaterDepth = sensor.depth() # No nead to read() again
-sensor.setFluidDensity(1000) # kg/m^3
-print(pressure)
-print(temp)
-print(freshwaterDepth)
-print(saltwaterDepth)
+#freshwaterDepth = sensor.depth() # default is freshwater
+#sensor.setFluidDensity(ms5837.DENSITY_SALTWATER)
+#saltwaterDepth = sensor.depth() # No nead to read() again
+#sensor.setFluidDensity(1000) # kg/m^3
+print(type(pressure))
+#print(temp)
+#print(freshwaterDepth)
+#print(saltwaterDepth)
 
 time.sleep(5)
 
