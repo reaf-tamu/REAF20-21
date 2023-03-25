@@ -1,22 +1,7 @@
 #!/usr/bin/env python
 
-"""
-Sweep.py
-
-This example shows how to use a servo motor attached to a PWM pin.
-
-This example code is in the public domain.
-
-Revision History
-----------------------------------------------------------
-    Author		   Date		  Description
-----------------------------------------------------------
-Diego Villalobos	02-12-2015	Example created
-
-"""
-
 # Libraries required
-#from Servo import *
+from Servo import *
 import time
 import Servo.py
 
@@ -24,7 +9,7 @@ import Servo.py
 myServo = Servo("First Servo")
 
 # Attaches the servo to pin 3 in Arduino Expansion board
-myServo.attach(3)
+myServo.attach(15)
 
 # Print servo settings
 print("")
@@ -36,7 +21,7 @@ try:
     # Sweeps the servo motor forever
     while True:
         # From 0 to 180 degrees
-        for angle in range(0,90):
+        for angle in range(90,95):
             myServo.write(angle)
             time.sleep(3)
 

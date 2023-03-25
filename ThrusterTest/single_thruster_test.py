@@ -6,7 +6,7 @@ import time
 kit = ServoKit(channels=16)
 sleep_sec = 1
 
-print(""AUV Single Motor Test Begin:)
+print("AUV Single Motor Test Begin:")
 move = input("Begin input:")
 
 def stop():
@@ -30,8 +30,8 @@ while(1):
         time.sleep(sleep_sec)
         stop()
 
-    else if (move == "p"):
-        thruster_val(90,90,90,90,90,90,90,90)
+    elif (move == "p"):
+        thruster_val(90,90,90,90,90,92,90,90)
         print("Motor Moving")
         time.sleep(sleep_sec)
         stop()
