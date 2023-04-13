@@ -11,7 +11,8 @@ import torch.backends.cudnn as cudnn
 
 sys.path.insert(0, './yolov5')
 from models.experimental import attempt_load
-from utils.general import check_img_size, non_max_suppression, scale_coords, xyxy2xywh
+#from utils.general import check_img_size, non_max_suppression, scale_coords, xyxy2xywh
+from utils.general import check_img_size, non_max_suppression, scale_segments, xyxy2xywh
 from utils.torch_utils import select_device
 from utils.augmentations import letterbox
 
@@ -97,7 +98,8 @@ def torch_thread(weights, img_size, conf_thres=0.2, iou_thres=0.45):
     imgsz = img_size
 
     # Load model
-    model = attempt_load(weights, map_location=device)  # load FP32
+    #model = attempt_load(weights, map_location=device)  # load FP32
+    model = attempt_load(weights, device=device)
     stride = int(model.stride.max())  # model stride
     imgsz = check_img_size(imgsz, s=stride)  # check img_size
     if half:
@@ -163,7 +165,8 @@ def main():
     zed.enable_positional_tracking(positional_tracking_parameters)
 
     obj_param = sl.ObjectDetectionParameters()
-    obj_param.detection_model = sl.DETECTION_MODEL.CUSTOM_BOX_OBJECTS
+    #obj_param.detection_model = sl.DETECTION_MODEL.CUSTOM_BOX_OBJECTS
+    obj_param.detection_model = sl.OBJECT_DETECTION_MODEL.CUSTOM_BOX_OBJECTS
     obj_param.enable_tracking = True
     zed.enable_object_detection(obj_param)
 
@@ -174,8 +177,9 @@ def main():
     camera_infos = zed.get_camera_information()
     # Create OpenGL viewer
     viewer = gl.GLViewer()
-    point_cloud_res = sl.Resolution(min(camera_infos.camera_resolution.width, 720),
-                                    min(camera_infos.camera_resolution.height, 404))
+    #point_cloud_res = sl.Resolution(min(camera_infos.camera_resolution.width, 720),
+                                    #min(camera_infos.camera_resolution.height, 404))
+    point_cloud_res = sl.Resolution(min(camera_infos.camera_configuration.resolution.width, 720),      		min(camera_infos.camera_configuration.resolution.height, 404))
     point_cloud_render = sl.Mat()
     viewer.init(camera_infos.camera_model, point_cloud_res, obj_param.enable_tracking)
     point_cloud = sl.Mat(point_cloud_res.width, point_cloud_res.height, sl.MAT_TYPE.F32_C4, sl.MEM.CPU)

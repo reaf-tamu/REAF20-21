@@ -1,6 +1,7 @@
 import time
 from adafruit_servokit import ServoKit
 import adafruit_motor.servo
+import keyboard
 
 kit = ServoKit(channels = 16)
 
@@ -54,10 +55,17 @@ M4 = Motor(11)
 #kit.servo[0].angle = 95
 while(1):
 
-	A1.setSpeed(90)
-	A1.run()	
-	print(A1.speed)
+	M4.setSpeed(90)
+	M4.run()	
+	print(M4.speed)
 	time.sleep(2)
+	
+"""
+	if keyboard.read_key() == "q":
+		print("hey we did it")
+		break
+"""
+	
 
 	#kit.servo[0].angle = 87
 	#print(94)
