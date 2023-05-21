@@ -7,7 +7,9 @@ myPing.connect_serial("COM3", 115200)
 if myPing.initialize() is False:
     print("Failed to initialize Ping!")
     exit(1)
-
+myPing.set_ping_interval(29)
+myPing.set_speed_of_sound(1500)
+myPing.set_gain_index(2)
 def sender():
     pub = rospy.Publisher('Pinger', Float32, queue_size=10)
     rospy.init_node('sonar', anonymous=True)
