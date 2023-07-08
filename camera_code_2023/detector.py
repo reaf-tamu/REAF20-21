@@ -9,10 +9,40 @@ import cv2
 import pyzed.sl as sl
 import torch.backends.cudnn as cudnn
 
+# Create a ZED camera object
+zed = sl.Camera()
+
+# Set configuration parameters
+init_params = sl.InitParameters()
+init_params.camera_resolution = sl.RESOLUTION.HD1080  # Use HD1080 video mode
+init_params.camera_fps = 30  # Set fps at 30
+
+# Open the camera
+err = zed.open(init_params)
+if err != sl.ERROR_CODE.SUCCESS:
+    exit(1)
+
+# Capture 50 frames and stop
+i = 0
+image = sl.Mat()
+runtime_parameters = sl.RuntimeParameters()
+while i < 50:
+    # Grab an image, a RuntimeParameters object must be given to grab()
+    if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
+        # A new image is available if grab() returns ERROR_CODE.SUCCESS
+        zed.retrieve_image(image, sl.VIEW.LEFT) # Get the left image
+        timestamp = zed.get_timestamp(sl.TIME_REFERENCE.IMAGE)  # Get the image timestamp
+        print("Image resolution: {0} x {1} || Image timestamp: {2}\n".format(image.get_width(), image.get_height(), timestamp.get_milliseconds()))
+        i = i + 1
+
+# Close the camera
+zed.close()
+
+"""
 sys.path.insert(0, './yolov5')
 from models.experimental import attempt_load
-#from utils.general import check_img_size, non_max_suppression, scale_coords, xyxy2xywh
-from utils.general import check_img_size, non_max_suppression, scale_segments, xyxy2xywh
+from utils.general import (LOGGER, Profile, check_file, check_img_size, check_imshow, check_requirements, colorstr, cv2,
+                           increment_path, non_max_suppression, print_args, scale_boxes, strip_optimizer, xyxy2xywh)
 from utils.torch_utils import select_device
 from utils.augmentations import letterbox
 
@@ -72,7 +102,7 @@ def detections_to_custom_box(detections, im, im0):
     output = []
     for i, det in enumerate(detections):
         if len(det):
-            det[:, :4] = scale_coords(im.shape[2:], det[:, :4], im0.shape).round()
+            det[:, :4] = scale_boxes(im.shape[2:], det[:, :4], im0.shape).round()
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
 
             for *xyxy, conf, cls in reversed(det):
@@ -98,8 +128,8 @@ def torch_thread(weights, img_size, conf_thres=0.2, iou_thres=0.45):
     imgsz = img_size
 
     # Load model
-    #model = attempt_load(weights, map_location=device)  # load FP32
-    model = attempt_load(weights, device=device)
+    
+    model = attempt_load(weights, device=device)  # load FP32
     stride = int(model.stride.max())  # model stride
     imgsz = check_img_size(imgsz, s=stride)  # check img_size
     if half:
@@ -165,7 +195,6 @@ def main():
     zed.enable_positional_tracking(positional_tracking_parameters)
 
     obj_param = sl.ObjectDetectionParameters()
-    #obj_param.detection_model = sl.DETECTION_MODEL.CUSTOM_BOX_OBJECTS
     obj_param.detection_model = sl.OBJECT_DETECTION_MODEL.CUSTOM_BOX_OBJECTS
     obj_param.enable_tracking = True
     zed.enable_object_detection(obj_param)
@@ -177,9 +206,8 @@ def main():
     camera_infos = zed.get_camera_information()
     # Create OpenGL viewer
     viewer = gl.GLViewer()
-    #point_cloud_res = sl.Resolution(min(camera_infos.camera_resolution.width, 720),
-                                    #min(camera_infos.camera_resolution.height, 404))
-    point_cloud_res = sl.Resolution(min(camera_infos.camera_configuration.resolution.width, 720),      		min(camera_infos.camera_configuration.resolution.height, 404))
+    point_cloud_res = sl.Resolution(min(camera_infos.camera_resolution.width, 720),
+                                    min(camera_infos.camera_resolution.height, 404))
     point_cloud_render = sl.Mat()
     viewer.init(camera_infos.camera_model, point_cloud_res, obj_param.enable_tracking)
     point_cloud = sl.Mat(point_cloud_res.width, point_cloud_res.height, sl.MAT_TYPE.F32_C4, sl.MEM.CPU)
@@ -258,3 +286,4 @@ if __name__ == '__main__':
 
     with torch.no_grad():
         main()
+"""

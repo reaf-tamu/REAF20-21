@@ -17,7 +17,7 @@ if err != sl.ERROR_CODE.SUCCESS:
 obj_param = sl.ObjectDetectionParameters()
 obj_param.enable_tracking=True
 obj_param.image_sync=True
-obj_param.enable_mask_output=True
+#obj_param.enable_mask_output=True
 
 # Object tracking requires the positional tracking module
 camera_infos = zed.get_camera_information()

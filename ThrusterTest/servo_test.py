@@ -1,7 +1,7 @@
 import time
 from adafruit_servokit import ServoKit
-import adafruit_motor.servo
-import keyboard
+#import adafruit_motor.servo
+#import keyboard
 
 kit = ServoKit(channels = 16)
 
@@ -13,7 +13,7 @@ A4 = kit.servo[3].angle = 90
 M1 = kit.servo[7].angle = 90    
 M2 = kit.servo[9].angle = 90    
 M3 = kit.servo[10].angle = 90   
-M4 = kit.servo[11].angle = 90    
+M4 = kit.servo[13].angle = 90    
 
 
 '''import RPi.GPIO as GPIO
@@ -50,16 +50,81 @@ A4 = Motor(3)
 M1 = Motor(7)
 M2 = Motor(9)
 M3 = Motor(10)
-M4 = Motor(11)
+M4 = Motor(13)
+
+M4.setSpeed(90)
+M4.run()
+M3.setSpeed(90)
+M3.run()
+M2.setSpeed(90)
+M2.run()
+M1.setSpeed(90)
+M1.run()
+A4.setSpeed(90)
+A4.run()
+A3.setSpeed(90)
+A3.run()
+A2.setSpeed(90)
+A2.run()
+A1.setSpeed(90)
+A1.run()
+
+#time.sleep(180)
 
 #kit.servo[0].angle = 95
 while(1):
 
+# left/right
+	A3.setSpeed(90)
+	A3.run()	
+	print('A3 =',A3.speed)
+	#time.sleep(2)
+
+# left/right
+	M1.setSpeed(90)
+	M1.run()	
+	print('M1 =',M1.speed)
+#	time.sleep(2)
+	
+	# left/right
+	A1.setSpeed(90)
+	A1.run()	
+	print('A1 =',A1.speed)
+#	time.sleep(2)
+
+	# up/down
+	A2.setSpeed(90)
+	A2.run()	
+	print('A2 =',A2.speed)
+#	time.sleep(2)
+
+
+	# up/down
+	A4.setSpeed(90)
+	A4.run()	
+	print('A4 =',A4.speed)
+#	time.sleep(2)
+
+	
+	# up/down
+	M2.setSpeed(90)
+	M2.run()	
+	print('M2 =',M2.speed)
+#	time.sleep(2)
+
+# left/right
+	M3.setSpeed(90)
+	M3.run()	
+	print('M3 =',M3.speed)
+	#time.sleep(2)
+
+	# up/down
 	M4.setSpeed(90)
 	M4.run()	
-	print(M4.speed)
-	time.sleep(2)
+	print('M4 =',M4.speed)
+#	time.sleep(2)
 	
+	print("\n\n")
 """
 	if keyboard.read_key() == "q":
 		print("hey we did it")

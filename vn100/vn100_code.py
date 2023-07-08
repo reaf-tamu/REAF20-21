@@ -4,6 +4,9 @@ from distutils.core import setup, Extension
 #import vnpy
 import time
 from vnpy import *
+from math import atan2, pi
+import csv
+
 #s = VnSensor()
 #s.connect('/dev/ttyUSB0', 115200)
 #print(s.read_model_number())
@@ -36,17 +39,54 @@ from vnpy import *
 s = VnSensor()
 s.connect('/dev/ttyUSB0', 115200)
 
-
-orientation = s.read_yaw_pitch_roll()
-print(f"x axis: {orientation.x}\ny axis {orientation.y}\nz axis {orientation.z}")
+"""
+#import csv
 while(True):
+	with open('vn100.csv','w') as f:
+		orientation = s.read_yaw_pitch_roll()
+		writer = csv.writer(f)
+		row = [orientation.x]
+		writer.writerow(row)
+		print(row)
+	time.sleep(10)
+"""
+
+#orientation = s.read_yaw_pitch_roll()
+#print(f"x axis: {orientation.x}\ny axis {orientation.y}\nz axis {orientation.z}")
+#minute = 0
+#while minute <= 5:
+#	time.sleep(60)
+#	minute += 1
+#	print(minute)
+#print("")
+
+#seconds = 0
+#with open('vn100_heading_yaw.csv','w') as f:
+
+while(True):
+	orientation = s.read_yaw_pitch_roll()
+#	print(f"x axis: {orientation.x}\ny axis: {orientation.y}\nz axis: {orientation.z}")
+	print("x axis:", {orientation.x},"\ny axis:",{orientation.y},"\nz axis:",{orientation.z})
 	imuData = s.read_imu_measurements()
 	print(imuData.pressure," kPa")
-	print(imuData.mag," Gaus")
-	print(imuData.accel," m/s^2")
-	print(imuData.gyro," rad/s")
-	print(imuData.temp," C")
-	time.sleep(1)
+#		print(imuData.mag," Gaus")		
+	heading = atan2(imuData.mag.x, imuData.mag.y) * 180 / pi
+	new_heading = heading - 60	
+	print(new_heading)
+	print(heading)
+#		print(YawPitchRollMagneticAccelerationAndAngularRatesRegister.mag)
+#		print(imuData.accel," m/s^2")
+#		print(imuData.gyro," rad/s")
+#		print(imuData.temp," C")
+	print('\n\n')
+	time.sleep(5)
+
+#	seconds += 1	
+
+#		writer = csv.writer(f)
+		#row = [seconds, orientation.x, orientation.y, orientation.z, imuData.pressure, new_heading]
+#		row = [seconds, orientation.x, new_heading, heading]
+#		writer.writerow(row)
 #m = ImuMeasurementsRegister
 #s.connect('/dev/ttyUSB0', 115200)
 #cd = ez.current_data
@@ -58,7 +98,6 @@ while(True):
 #s.connect('/dev/ttyUSB0', 115200)
 #c = GpsCompassBaselineRegister()
 #print(s.read_gps_compass_baseline())
-
 
 
 

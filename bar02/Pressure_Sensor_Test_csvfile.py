@@ -30,7 +30,8 @@ sensor.setFluidDensity(ms5837.DENSITY_SALTWATER)
 saltwaterDepth = sensor.depth() # No nead to read() again
 sensor.setFluidDensity(1000) # kg/m^3
 
-
+# original code
+"""
 def ps_data(pressure,temp,freshwaterDepth,saltwaterDepth): # x is whatever the pressure sensors outputs
     import csv
     header = ['pressure','temp','freshwaterDepth','saltwaterDepth']
@@ -41,9 +42,24 @@ def ps_data(pressure,temp,freshwaterDepth,saltwaterDepth): # x is whatever the p
         while True:
             writer.writerow(append)
             time.sleep(1)
+	    print('pressure =',pressure)
+	    print('temp =', temp)
     csvFile.close()
- 
+
+
 ps_data(pressure,temp,freshwaterDepth,saltwaterDepth)
+"""
+
+
+import csv
+# new code to work with publisher
+while(True):
+	with open('pressure_sensor_pub.csv','w') as f:
+		writer = csv.writer(f)
+		row = [pressure,temp,freshwaterDepth,saltwaterDepth]
+		writer.writerow(row)
+		print(row)
+	time.sleep(10)
 
 
 #print(pressure)
