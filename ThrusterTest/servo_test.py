@@ -68,29 +68,99 @@ A2.setSpeed(90)
 A2.run()
 A1.setSpeed(90)
 A1.run()
-
-#time.sleep(180)
-
-#kit.servo[0].angle = 95
+"""
 while(1):
-
-# left/right
-	A3.setSpeed(90)
-	A3.run()	
-	print('A3 =',A3.speed)
-	#time.sleep(2)
-
-# left/right
-	M1.setSpeed(90)
-	M1.run()	
-	print('M1 =',M1.speed)
-#	time.sleep(2)
-	
 	# left/right
+	M2.setSpeed(90)
+	M2.run()	
+	print('M2 =',M2.speed)
+#	time.sleep(2)
+"""
+
+"""
+t = 0
+while t < 15:
+	M4.setSpeed(100)
+	M4.run()
+	print('M4 =',M4.speed)
+	t += 1
+	time.sleep(1)
+
+while t < 30:
+	M4.setSpeed(90)
+	M4.run()
+	print('M4 =',M4.speed)
+	t += 1
+	time.sleep(1)
+
+while t < 45:
+	M4.setSpeed(100)
+	M4.run()
+	print('M4 =',M4.speed)
+	t += 1
+	time.sleep(1)
+
+while t < 60:
+	M4.setSpeed(90)
+	M4.run()
+	print('M4 =',M4.speed)
+	t += 1
+	time.sleep(1)
+"""
+
+# time.sleep(180)
+"""
+# forward
+while True:
 	A1.setSpeed(90)
 	A1.run()	
 	print('A1 =',A1.speed)
+
+	A3.setSpeed(90)
+	A3.run()	
+	print('A3 =',A3.speed)
+
+	M1.setSpeed(90)
+	M1.run()	
+	print('M1 =',M1.speed)
+
+	M4.setSpeed(90)
+	M4.run()	
+	print('M4 =',M4.speed)
+	
+	print("\n")
+"""
+"""
+# up
+while True:
+	A2.setSpeed(90)
+	A2.run()	
+	print('A2 =',A2.speed)
+
+	print("\n")
+"""
+"""
+#down
+while True:
+	A4.setSpeed(90)
+	A4.run()	
+	print('A4 =',A4.speed)
+
+	A2.setSpeed(90)
+	A2.run()	
+	print('A2 =',A2.speed)
+	
+	print("\n")
+
+#kit.servo[0].angle = 95
+"""
+"""
+	# up/down
+	M4.setSpeed(100)
+	M4.run()	
+	print('M4 =',M4.speed)
 #	time.sleep(2)
+
 
 	# up/down
 	A2.setSpeed(90)
@@ -98,6 +168,11 @@ while(1):
 	print('A2 =',A2.speed)
 #	time.sleep(2)
 
+# 	left/right
+	A3.setSpeed(90)
+	A3.run()	
+	print('A3 =',A3.speed)
+	#time.sleep(2)
 
 	# up/down
 	A4.setSpeed(90)
@@ -105,26 +180,29 @@ while(1):
 	print('A4 =',A4.speed)
 #	time.sleep(2)
 
-	
+# 	left/right
+	M1.setSpeed(90)
+	M1.run()	
+	print('M1 =',M1.speed)
+#	time.sleep(2)	
+
 	# up/down
 	M2.setSpeed(90)
 	M2.run()	
 	print('M2 =',M2.speed)
 #	time.sleep(2)
 
-# left/right
+# 	left/right
 	M3.setSpeed(90)
 	M3.run()	
 	print('M3 =',M3.speed)
 	#time.sleep(2)
 
-	# up/down
-	M4.setSpeed(90)
-	M4.run()	
-	print('M4 =',M4.speed)
-#	time.sleep(2)
+
 	
 	print("\n\n")
+"""
+
 """
 	if keyboard.read_key() == "q":
 		print("hey we did it")
@@ -135,3 +213,4 @@ while(1):
 	#kit.servo[0].angle = 87
 	#print(94)
 	#time.sleep(5)
+

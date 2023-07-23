@@ -1,20 +1,38 @@
-
-import Jetson.GPIO as GPIO
 import time
+from adafruit_servokit import ServoKit
+#import Jetson.GPIO as GPIO
+import digitalio
+import board
+#import adafruit_motor.servo
+#import keyboard
 
+
+button = digitalio.DigitalInOut(board.D18)
+button.direction = digitalio.Direction.INPUT
+button.pull = digitalio.Pull.UP
+
+while (1):
+    status = button.value
+    print(status)
+    time.sleep(1)
+
+
+"""
 # Set the GPIO pin numbering mode
 GPIO.setmode(GPIO.BOARD)
-
 # Specify the GPIO pin number you want to read from
 pin_number = 18
-
 # Set up the GPIO pin as an input
 GPIO.setup(pin_number, GPIO.IN)
 
+while True:
+	input_status = GPIO.input(pin_number)
+	print(input_status)
+	time.sleep(1)
 """
-from adafruit_servokit import ServoKit
 
-kit = ServoKit(channels = 16)
+
+#kit = ServoKit(channels = 16, address = 0x40)
 
 # Turn OFF all thrusters
 A1 = kit.servo[0].angle = 90   
@@ -25,6 +43,13 @@ M1 = kit.servo[7].angle = 90
 M2 = kit.servo[9].angle = 90    
 M3 = kit.servo[10].angle = 90   
 M4 = kit.servo[13].angle = 90    
+
+
+'''import RPi.GPIO as GPIO
+import timeGPIO.setmode(GPIO.BOARD)
+GPIO.setup(15,GPIO.OUT)
+
+servo.angle == 90'''
 
 def set_speed(speed, motor):
 	kit.servo[motor].angle = speed
@@ -189,52 +214,3 @@ while mission_switch == True:
         A4.setSpeed(90)
         M2.run()
         A4.run()
-
-
-"""
-try:
-    while True:
-        # Read the input status
-        input_status = GPIO.input(pin_number)
-        
-        # Check the input status and perform actions accordingly
-        if input_status == GPIO.HIGH:
-            print("Input is HIGH")
-            t = 0
-            while input_status == GPIO.HIGH:
-                input_status = GPIO.input(pin_number)
-                t += 1
-                print(t)
-                time.sleep(1)
-        i = 0
-        print("Input is LOW")
-        while input_status == GPIO.LOW:
-            input_status = GPIO.input(pin_number)
-            i += 1
-            print(i)
-            time.sleep(1)
-        
-except KeyboardInterrupt:
-    # Clean up the GPIO settings on program exit
-    GPIO.cleanup()
-
-
-"""
-import Jetson.GPIO as GPIO
-import time
-import os
-
-# adjust pin number
-buttonpin = 18
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(buttonpin,GPIO.IN)
-
-# while True:
-
-for range(5):
-	try:
-		if (GPIO.input(buttonpin)):
-			os.system("python3 vn100/vn100_code.py")
-	except:
-		break
-"""

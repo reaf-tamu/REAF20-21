@@ -56,10 +56,11 @@ import csv
 while(True):
 	with open('pressure_sensor_pub.csv','w') as f:
 		writer = csv.writer(f)
-		row = [pressure,temp,freshwaterDepth,saltwaterDepth]
+		# row = [pressure,temp,freshwaterDepth,saltwaterDepth]
+		row = [saltwaterDepth]
 		writer.writerow(row)
 		print(row)
-	time.sleep(10)
+	time.sleep(1)
 
 
 #print(pressure)
