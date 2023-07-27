@@ -1,12 +1,11 @@
 #!/usr/bin/python
 import ms5837
 import time
+import csv
 
-#sensor = ms5837.MS5837_30BA() # Default I2C bus is 1 (Raspberry Pi 3)
-#sensor = ms5837.MS5837_30BA(0) # Specify I2C bus
+
+# connect to sensor
 sensor = ms5837.MS5837_02BA()
-#sensor = ms5837.MS5837_02BA(0)
-#sensor = ms5837.MS5837(model=ms5837.MS5837_MODEL_30BA, bus=0) # Specify model and bus
 
 # We must initialize the sensor before reading it
 if not sensor.init():
@@ -19,18 +18,32 @@ if not sensor.read():
     exit(1)
 
 
+# variables for measurement
 pressure = sensor.pressure(ms5837.UNITS_psi)
-
-
 temp = sensor.temperature(ms5837.UNITS_Centigrade)
-
 
 freshwaterDepth = sensor.depth() # default is freshwater
 sensor.setFluidDensity(ms5837.DENSITY_SALTWATER)
 saltwaterDepth = sensor.depth() # No nead to read() again
 sensor.setFluidDensity(1000) # kg/m^3
 
-# original code
+
+# writes freshwater depth to a csv file
+# NOTE: this code writes over the same first row each time so there will only be one value of data in the file
+while(True):
+	with open('pressure_sensor_pub.csv','w') as f:
+		writer = csv.writer(f)
+		# row = [pressure,temp,freshwaterDepth,saltwaterDepth]
+		row = [freshwaterDepth]
+		writer.writerow(row)
+		print(row)
+	time.sleep(1)
+
+
+
+# this code prints out all reading to a csv
+# not needed for competition
+# above can be also print it all
 """
 def ps_data(pressure,temp,freshwaterDepth,saltwaterDepth): # x is whatever the pressure sensors outputs
     import csv
@@ -50,19 +63,8 @@ def ps_data(pressure,temp,freshwaterDepth,saltwaterDepth): # x is whatever the p
 ps_data(pressure,temp,freshwaterDepth,saltwaterDepth)
 """
 
-
-import csv
-# new code to work with publisher
-while(True):
-	with open('pressure_sensor_pub.csv','w') as f:
-		writer = csv.writer(f)
-		# row = [pressure,temp,freshwaterDepth,saltwaterDepth]
-		row = [saltwaterDepth]
-		writer.writerow(row)
-		print(row)
-	time.sleep(1)
-
-
+# stuff moved to the bottom because I was scared to delete it
+"""
 #print(pressure)
 #print(temp)
 #print(freshwaterDepth)
@@ -72,9 +74,9 @@ while(True):
 
 # Spew readings
 
-
-
-
-
-
-    
+#sensor = ms5837.MS5837_30BA() # Default I2C bus is 1 (Raspberry Pi 3)
+#sensor = ms5837.MS5837_30BA(0) # Specify I2C bus
+sensor = ms5837.MS5837_02BA()
+#sensor = ms5837.MS5837_02BA(0)
+#sensor = ms5837.MS5837(model=ms5837.MS5837_MODEL_30BA, bus=0) # Specify model and bus
+"""
